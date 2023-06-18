@@ -57,4 +57,30 @@ values
 (3,1,8),
 (2,5,4),
 (2,3,3);
-select order_id, order_date,  order_total_price from `order` 
+select order_id, order_date,  order_total_price from `order` ;
+select customer_name from customer
+join `order` on customer.customer_id = `order`.customer_id
+group by customer.customer_id;
+
+select customer.customer_name, product.product_name
+from customer
+ JOIN `order` ON customer.customer_id = `order`.customer_id
+ JOIN order_detail ON `order`.order_id = order_detail.order_id
+ JOIN product ON order_detail.product_id = product.product_id
+ORDER BY customer.customer_id;
+
+
+select customer.customer_name 
+from customer
+left join `order` on customer.customer_id = `order`.customer_id
+where `order`.customer_id is null;
+
+
+SELECT `order`.order_id, `order`.order_date,
+       SUM(order_detail.oder_quantity * product.product_price) AS total_price
+FROM `order`
+LEFT JOIN order_detail ON `order`.order_id = order_detail.order_id
+LEFT JOIN product ON order_detail.product_id = product.product_id
+GROUP BY `order`.order_id, `order`.order_date;
+
+
