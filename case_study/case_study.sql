@@ -1,5 +1,5 @@
 create database case_study;
-use case_study;
+		
 CREATE TABLE vi_tri (
     ma_vi_tri INT PRIMARY KEY AUTO_INCREMENT,
     ten_vi_tri VARCHAR(45)
