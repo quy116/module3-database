@@ -102,7 +102,7 @@ group by ho_ten;
 -- cau 
 select distinct khach_hang.ho_ten
 from khach_hang;
--- cau19
+-- cau 9
 select month(hop_dong.ngay_lam_hop_dong) as month, count(hop_dong.ma_hop_dong) as so_luong_khach_dat_phong
 from hop_dong
 where hop_dong.ngay_lam_hop_dong > '2020-12-31'
@@ -129,4 +129,43 @@ FROM
         JOIN
     loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
 WHERE
-    loai_khach.ten_loai_khach = 'Diamond' and (khach_hang.dia_chi like "%Vinh%" or "%Quảng Ngãi%")
+    loai_khach.ten_loai_khach = 'Diamond' and (khach_hang.dia_chi like "%Vinh%" or "%Quảng Ngãi%");
+    -- bai 12
+    
+    
+SELECT 
+    hop_dong.ma_hop_dong,
+    nhan_vien.ho_ten,
+    khach_hang.ho_ten,
+    khach_hang.so_dien_thoai,
+    dich_vu.ten_dich_vu,
+    SUM(hop_dong_chi_tiet.so_luong)
+FROM
+    hop_dong
+        JOIN
+    nhan_vien ON hop_dong.ma_nhan_vien = nhan_vien.ma_nhan_vien
+        JOIN
+    khach_hang ON hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+        JOIN
+    dich_vu ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        LEFT JOIN
+    hop_dong_chi_tiet ON hop_dong.ma_hop_dong = hop_dong_chi_tiet.ma_hop_dong
+WHERE
+    (MONTH(hop_dong.ngay_lam_hop_dong) > 9
+        AND YEAR(hop_dong.ngay_lam_hop_dong) = 2020)
+        AND (MONTH((hop_dong.ngay_lam_hop_dong) < 7
+            AND YEAR(hop_dong.ngay_lam_hop_dong) = 2021) = 0)
+GROUP BY hop_dong.ma_hop_dong;
+SELECT
+    dvdk.ma_dich_vu_di_kem,
+    dvdk.ten_dich_vu_di_kem,
+    COUNT(*) AS so_lan_su_dung
+FROM
+    hop_dong_chi_tiet AS hdct
+    JOIN dich_vu_di_kem AS dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+    JOIN hop_dong AS hd ON hdct.ma_hop_dong = hd.ma_hop_dong
+GROUP BY
+    dvdk.ma_dich_vu_di_kem,
+    dvdk.ten_dich_vu_di_kem
+ORDER BY
+    so_lan_su_dung DESC;
