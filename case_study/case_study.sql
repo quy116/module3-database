@@ -40,7 +40,7 @@ CREATE TABLE nhan_vien (
     so_dien_thoai VARCHAR(45) NOT NULL,
     email VARCHAR(45),
     dia_chi VARCHAR(45),
-    ma_vi_tri INT,
+    ma_vi_tri INT not null,
     ma_trinh_do INT,
     ma_bo_phan INT,
     FOREIGN KEY (ma_vi_tri)
