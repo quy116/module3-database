@@ -1,0 +1,170 @@
+/* styles.css */
+
+/* Reset some default styles */
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+p,
+form,
+input,
+textarea,
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header styles */
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 100px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Hero section styles */
+.hero-section {
+  background-image: url("hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 100px 0;
+  color: #fff;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f39c12;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* About section styles */
+.about-section {
+  padding: 50px 0;
+}
+
+.about-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.about-section p {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Beers section styles */
+.beers-section {
+  padding: 50px 0;
+}
+
+.beers-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.beer-card {
+  display: inline-block;
+  width: 300px;
+  margin-right: 20px;
+}
+
+.beer-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.beer-card h3 {
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.beer-card p {
+  font-size: 16px;
+}
+
+/* Events section styles */
+.events-section {
+  padding: 50px 0;
+}
+
+.events-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.event-list li {
+  margin-bottom: 20px;
+}
+
+.event-list h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.event-list p {
+  font-size: 16px;
+}
+
+/* Contact section styles */
+.contact-section {
+  padding: 50px 0;
+}
+
+.contact-section h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.contact-section form {
+  margin-top: 20px;
+}
+
+.contact-section input,
+.contact-section textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.contact-section textarea {
+  height: 120px;
+}

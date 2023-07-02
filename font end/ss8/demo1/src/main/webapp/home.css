@@ -1,0 +1,129 @@
+body {
+    font-family: "Dancing Script", cursive;
+    line-height: 1.6;
+    background-color: black;
+}
+i {
+    padding-left: 0.2rem;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.hearder .item a {
+    text-decoration: none;
+    padding: 1rem;
+    font-size: 1.3rem;
+    border-radius: 0.3rem;
+}
+.hearder .item a:hover {
+    color: #fff;
+}
+.hearder .item a:hover {
+    background-color: #333;
+    color: #fff;
+}
+/* css header */
+.hearder {
+    font-family: "Caprasimo", cursive;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    position: fixed;
+    width: 100%;
+    /* z-index: 1; */
+}
+.hearder img {
+    width: 7rem;
+}
+.content-left {
+    display: flex;
+    align-items: center;
+}
+.content-right .item a,
+.content-left .item a {
+    padding: 3rem;
+    color: #d3d3d3;
+}
+.content-right {
+    display: flex;
+}
+.CONNECTING,
+.Bully {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    color: #fff;
+    max-width: 100%;
+    /* margin: 0 auto;
+    padding: 0 50px; */
+}
+.CONNECTING .item-left {
+    padding-left: 10rem;
+}
+.CONNECTING .item-right {
+    padding-top: 15rem;
+    text-align: center;
+    line-height: 2rem;
+}
+.CONNECTING .item-right .body {
+    margin-top: 2rem;
+}
+.Bully img,
+.CONNECTING img {
+    width: 100%;
+    height: 100%;
+}
+.Bully .item-left {
+    padding-top: 15rem;
+    text-align: center;
+    line-height: 2rem;
+}
+.Bully .item-left .body {
+    margin-top: 2rem;
+}
+.kodfun-galeri {
+    display: flex;
+    height: 30rem;
+    gap: 1rem;
+}
+.kodfun-galeri > div {
+    flex: 1;
+    border-radius: 1rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    transition: all 2s cubic-bezier(0.25, 4, 0.45, 1.4);
+}
+.kodfun-galeri > div:hover {
+    flex: 2;
+}
+.content-left .item a,
+.content-right .item a{
+    /*padding: 3rem;*/
+    position: relative;
+    transition: all 0.4s ease;}
+::after {
+     content: "";
+     position: absolute;
+     left: 50%;
+     width: 0%;
+     bottom: 0;
+     height: 4px;
+     z-index: -1;
+     background-color: #d3d3d3;
+     transition: all 0.4s ease;
+     transform: translateX(-50%);
+ }
+.content-left .item a:hover,
+.content-right .item a:hover{
+     color: pink;
+ }
+.content-right .item a:hover::after,
+.content-left .item a:hover::after {
+     width: 100%;
+     z-index: 1;
+     color: pink;
+     background-color: pink;
+ }
