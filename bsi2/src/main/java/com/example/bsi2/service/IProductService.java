@@ -9,4 +9,6 @@ public interface IProductService {
     void addService(Product product);
     Product getProductById(String id);
     void deleteService(String id);
+    List<Product> editService(String id, String name, String quantity, String price);
+//    void editService(Product product);
 }

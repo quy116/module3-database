@@ -14,11 +14,11 @@
 
     <form action="/ProductServlet?action=edit" method="post">
         <label for="id">nhap id</label>
-        <input type="number" id="id" name="id" value="${id}">
+        <input type="number" id="id" name="id" value="${id}" readonly>
         <label for="name">nhap name</label>
         <input type="text" id="name" name="name"  value="${name}">
         <label for="quanlity">nhap so luong</label>
-        <input type="number" id="quanlity" name="quanlity"  value="${quanlity}">
+        <input type="number" id="quanlity" name="quanlity"  value="${quantity}">
         <label for="price">nhap gia tien</label>
         <input type="number" id="price" name="price"  value="${price}">
         <input type="submit" value="submit">

@@ -31,7 +31,7 @@
 <%--                <td><c:out value="${product.price}"/></td--%>
 
                 <td><a href="/ProductServlet?action=delete&id=${product.id}">delete </a></td>
-                <td><a href="/ProductServlet?action=edit&id=${product.id}">edit </a></td>
+                <td><a href="/ProductServlet?action=edit&id=${product.id}&name=${product.name}&quantity=${product.quantity}&price=${product.price}">edit </a></td>
             </tr>
         </c:forEach>
     </table>

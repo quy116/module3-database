@@ -42,9 +42,11 @@ public class ProductServlet extends HttpServlet {
 
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
+
+        Product product = productService.getProductById(id);
         String name = request.getParameter("name");
         String quantity = request.getParameter("quantity");
-        String price = request.getParameter("price");
+        String price =request.getParameter("price");
         request.setAttribute("id", id);
         request.setAttribute("name", name);
         request.setAttribute("quantity", quantity);
@@ -71,6 +73,8 @@ public class ProductServlet extends HttpServlet {
 //                showCreate();
                 break;
             case "edit":
+                editProduct(request, response);
+//                showList(request,response);
                 break;
             case "delete":
 
@@ -81,6 +85,15 @@ public class ProductServlet extends HttpServlet {
                 showList(request, response);
                 break;
         }
+    }
+
+    private void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String id = request.getParameter("id");
+      String name = request.getParameter("name");
+      String quanlity = request.getParameter("quanlity");
+      String price = request.getParameter("price");
+      productService.editService(id, name,quanlity,price);
+      response.sendRedirect("/ProductServlet?msg=them%20moi%20thanh%20cong");
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) {

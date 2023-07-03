@@ -26,6 +26,7 @@ public class ProductRepository implements IProductRepository {
         for (int i = 0; i < productList.size(); i++) {
             if (productList.get(i).getId().equals(id)){
                 return productList.get(i);
+
             }
         }
         return null;
@@ -40,4 +41,11 @@ public class ProductRepository implements IProductRepository {
             }
         }
     }
+
+    @Override
+    public void edit(List<Product> productList) {
+        productList = productList;
+    }
+
+
 }
