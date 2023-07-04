@@ -22,8 +22,8 @@
     <input type="number" id="price" name="price">
     <input type="submit" value="submit">
 </form>
-<a href="ProductServlet.jsp" >back menu</a>
-<c:if test="${msg != null}">
+<a href="/ProductServlet" >back menu</a>
+<c:if test=" ${msg != null}">
     <c:out value="${msg}"/>
 </c:if>
 </body>

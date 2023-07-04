@@ -34,9 +34,6 @@ public class ProductServlet extends HttpServlet {
                 delete(request, response);
                 showList(request, response);
                 break;
-            case "find":
-
-                break;
             default:
                 showList(request, response);
                 break;
@@ -73,15 +70,11 @@ public class ProductServlet extends HttpServlet {
         switch (action) {
             case "create":
                 create(request, response);
-//                showCreate();
                 break;
             case "edit":
                 editProduct(request, response);
-//                showList(request,response);
                 break;
-            case "delete":
 
-                break;
             case "find":
                 findMyName(request,response);
                 break;
@@ -109,7 +102,7 @@ public class ProductServlet extends HttpServlet {
       String quanlity = request.getParameter("quanlity");
       String price = request.getParameter("price");
       productService.editService(id, name,quanlity,price);
-      response.sendRedirect("/ProductServlet?msg=them%20moi%20thanh%20cong");
+      response.sendRedirect("/ProductServlet");
     }
 
     private void delete(HttpServletRequest request, HttpServletResponse response) {
@@ -127,7 +120,7 @@ public class ProductServlet extends HttpServlet {
         productService.addService(product);
 
         try {
-            response.sendRedirect("/ProductServlet?msg=them%20moi%20thanh%20cong");
+            response.sendRedirect("/ProductServlet");
         } catch (IOException e) {
             e.printStackTrace();
         }
