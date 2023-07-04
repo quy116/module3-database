@@ -38,5 +38,10 @@
 
 </div>
 <a href="/ProductServlet?action=showFormCreate">create product</a>
+<form action="/ProductServlet?action=find" method="post">
+    <label for="find">nhap ten vao de tim</label>
+    <input type="text" id="find" name="find">
+    <input type="submit" value="search">
+</form>
 </body>
 </html>

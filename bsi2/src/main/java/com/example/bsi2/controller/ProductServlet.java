@@ -8,12 +8,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+
 
 @WebServlet(name = "ProductServlet", value = "/ProductServlet")
 public class ProductServlet extends HttpServlet {
-    IProductService productService = new ProductService() {
-    };
+    IProductService productService = new ProductService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +34,8 @@ public class ProductServlet extends HttpServlet {
                 delete(request, response);
                 showList(request, response);
                 break;
-            case "view":
+            case "find":
+
                 break;
             default:
                 showList(request, response);
@@ -40,10 +43,10 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
+
+
     private void showFormEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
-
-        Product product = productService.getProductById(id);
         String name = request.getParameter("name");
         String quantity = request.getParameter("quantity");
         String price =request.getParameter("price");
@@ -79,14 +82,27 @@ public class ProductServlet extends HttpServlet {
             case "delete":
 
                 break;
-            case "view":
+            case "find":
+                findMyName(request,response);
                 break;
             default:
                 showList(request, response);
                 break;
         }
     }
+    private void findMyName(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
 
+        String name = request.getParameter("find");
+        List<Product> productList = productService.getProductByName(name);
+        request.setAttribute("productList", productList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/search.jsp");
+        requestDispatcher.forward(request,response);
+//        request.setAttribute("list", list);
+//        String msg = request.getParameter("msg");
+//        request.setAttribute("msg", msg);
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("list.jsp");
+//        requestDispatcher.forward(request, response);
+    }
     private void editProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       String id = request.getParameter("id");
       String name = request.getParameter("name");

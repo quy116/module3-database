@@ -4,10 +4,11 @@ import com.example.bsi2.model.Product;
 import com.example.bsi2.repository.IProductRepository;
 import com.example.bsi2.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService implements IProductService {
-    IProductRepository iProductRepository = new ProductRepository() {
+    ProductRepository iProductRepository = new ProductRepository() {
     };
 
     @Override
@@ -21,12 +22,9 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product getProductById(String id) {
-        if (iProductRepository.getProductById(id) == null) {
-
-        }
-        return iProductRepository.getProductById(id);
-
+    public List<Product> getProductByName(String name) {
+      List<Product> list = iProductRepository.getProductByName(name);
+        return list;
     }
 
 
@@ -49,6 +47,12 @@ public class ProductService implements IProductService {
         }
         iProductRepository.edit(list);
         return list;
+    }
+
+    @Override
+    public List<Product> getList() {
+//        iProductRepository
+        return null;
     }
 
 
