@@ -4,6 +4,7 @@ import model.User;
 import repository.IUserRepository;
 import repository.UserRepository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService implements IUserService {
@@ -11,18 +12,22 @@ public class UserService implements IUserService {
 
     @Override
     public List<User> showList() {
-        return repository.selectAlltUserRepository();
+
+//        return repository.selectAlltUserRepository();
+        return repository.selectAllUser();
     }
 
     @Override
     public boolean deleteService(int id) {
-        Boolean check = repository.deleteUserRepository(id);
+//        Boolean check = repository.deleteUserRepository(id);
+        Boolean check = repository.deleteUser(id);
         return check;
     }
 
     @Override
-    public void create(User user) {
-        repository.insertUserRepository(user);
+    public void create(User user) throws SQLException {
+//        repository.insertUserRepository(user);
+        repository.insertUserStore(user);
     }
 
     @Override
@@ -43,7 +48,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> selectByName() {
-        return repository.selectUserByNameRepository();
+    public List<User> selectSortName() {
+        return repository.selectSortByNameRepository();
     }
 }

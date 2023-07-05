@@ -4,6 +4,7 @@ import model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import java.sql.SQLException;
@@ -19,7 +20,8 @@ public class UserRepository implements IUserRepository {
     private static final String SELECT_USERS_BY_COUNTRY_SQL = "SELECT users.id, users.name, users.email, users.country FROM users WHERE country = ?";
     private static final String SELECT_USERS_BY_NAME_SQL = "SELECT users.id, users.name, users.email, users.country FROM users ORDER BY users.name";
 
-
+    private static final String SELECT_All_USERS_QUERY = "call select_user";
+    private static final String DELETE_USERS_QUERY = "call delete_user(?);";
 
     public void insertUserRepository(User user) {
         try (Connection connection = getConnection();
@@ -80,14 +82,14 @@ public class UserRepository implements IUserRepository {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USERS_BY_COUNTRY_SQL);
-            preparedStatement.setString(1,country);
+            preparedStatement.setString(1, country);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = Integer.parseInt(resultSet.getString("id"));
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String newCountry = resultSet.getString("country");
-                userList.add(new User(id,name,email,newCountry));
+                userList.add(new User(id, name, email, newCountry));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -96,18 +98,18 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public List<User> selectUserByNameRepository() {
+    public List<User> selectSortByNameRepository() {
         List<User> list = new ArrayList<>();
         Connection connection = getConnection();
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_USERS_BY_NAME_SQL);
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                list.add(new User(id,name,email,country));
+                list.add(new User(id, name, email, country));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -146,6 +148,76 @@ public class UserRepository implements IUserRepository {
         }
         return checkUpdate;
 
+    }
+
+    @Override
+    public User getUserById(int id) throws SQLException {
+        User user = null;
+        String query = "{CALL get_user_by_id(?)}";
+        try {
+            Connection connection = getConnection();
+            CallableStatement callableStatement = connection.prepareCall(query);
+            callableStatement.setInt(1, id);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void insertUserStore(User user) throws SQLException {
+        String query = "{CALL insert_user (?,?,?)}";
+        try {
+            Connection connection = getConnection();
+            CallableStatement callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, user.getName());
+            callableStatement.setString(2, user.getEmail());
+            callableStatement.setString(3, user.getCountry());
+            callableStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<User> selectAllUser() {
+        List<User> list = new ArrayList<>();
+        try {
+            Connection connection = getConnection();
+            CallableStatement callableStatement = connection.prepareCall(SELECT_All_USERS_QUERY);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                list.add(new User(id, name, email, country));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        boolean check;
+        try {
+            Connection connection = getConnection();
+            CallableStatement callableStatement = connection.prepareCall(DELETE_USERS_QUERY);
+            callableStatement.setInt(1,id);
+            check = callableStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return check;
     }
 
 }

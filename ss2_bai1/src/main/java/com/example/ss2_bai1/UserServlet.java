@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/UserServlet")
@@ -24,8 +25,8 @@ public class UserServlet extends HttpServlet {
             case "create":
                 showNewForm(request, response);
                 break;
-            case "sapXep":
-                showListSapXep(request, response);
+            case "sort":
+                showListSort(request, response);
                 break;
             case "delete":
                 delete(request, response);
@@ -39,10 +40,10 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    private void showListSapXep(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
-        List<User> userList = userService.selectByName();
+    private void showListSort(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
+        List<User> userList = userService.selectSortName();
         request.setAttribute("userList", userList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("sapXep.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("sort.jsp");
         requestDispatcher.forward(request,response);
     }
 
@@ -78,7 +79,11 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                create(request, response);
+                try {
+                    create(request, response);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
 //                showList(request, response);
                 break;
             case "edit":
@@ -124,7 +129,7 @@ public class UserServlet extends HttpServlet {
 
     }
 
-    private void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");

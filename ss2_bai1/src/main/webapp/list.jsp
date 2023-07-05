@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--
   Created by IntelliJ IDEA.
   User: gaugaune
@@ -33,7 +34,7 @@
         </tr>
     </c:forEach>
     <a href="UserServlet?action=create">them moi o day ne!!!</a>
-    <a href="UserServlet?action=sapXep">sap xep ne</a>
+    <a href="UserServlet?action=sort">sap xep ne</a>
 
 </table>
 <form method="post" action="UserServlet?action=findId">
